@@ -1,11 +1,11 @@
 import './style.css'
-import { background } from './entities'
+import { city } from './entities'
 
 export let hasStarted = true
 
 function animationLoop() {
 
-  background.update(hasStarted)
+  city.update(hasStarted)
 
   requestAnimationFrame(animationLoop)
 }
