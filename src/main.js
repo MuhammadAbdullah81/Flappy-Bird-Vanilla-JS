@@ -1,7 +1,7 @@
 import './style.css'
 import { background } from './entities'
 
-export let hasStarted = false
+export let hasStarted = true
 
 function animationLoop() {
 
@@ -11,7 +11,3 @@ function animationLoop() {
 }
 
 requestAnimationFrame(animationLoop)
-
-window.addEventListener("click", () => {
-  hasStarted = true
-})
