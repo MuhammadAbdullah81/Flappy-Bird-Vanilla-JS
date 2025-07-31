@@ -1,9 +1,8 @@
 import { Background } from "./classes"
-import { canvas, ctx } from "./canvas"
 import { GAME_ASSETS } from "./assets"
 
 export const background = new Background({
-    canvas: canvas,
-    ctx: ctx,
-    assets: GAME_ASSETS.background
+    assets: GAME_ASSETS['background'],
+    cityAspectRatio: { h: 512, w: 288 },
+    baseAspectRatio: { h: 112, w: 336 }
 })

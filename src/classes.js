@@ -1,90 +1,63 @@
+import { ctx, canvas } from "./canvas"
+
 export class Background {
 
-    constructor({
-        assets,
-        ctx,
-        canvas
-    }) {
+    constructor({ assets, cityAspectRatio, baseAspectRatio }) {
 
-        this.ctx = ctx
-        this.canvas = canvas
-        this.BACKGROUND = assets
+        this.assets = assets
 
-        for (const asset in this.BACKGROUND) {
-            this.BACKGROUND[asset].image = new Image()
-            this.BACKGROUND[asset].image.src = this.BACKGROUND[asset].imgSrc
+        for (let asset in assets) {
+            assets[asset].image = new Image()
+            assets[asset].image.src = assets[asset].imgSrc
         }
 
-        this.CITY_POSITION = {
-            primary: {
-                x: 0,
-                y: 0
-            },
-            secondary: {
-                x: this.#getSecondaryImageX('city'),
-                y: 0
-            }
+        this.cityPosition = {
+            primary: { x: 0, y: 0 },
+            secondary: { x: cityAspectRatio.w, y: 0 }
         }
 
-        this.BASE_POSITION = {
-            primary: {
-                x: 0,
-                y: this.#getBaseY()
-            },
-            secondary: {
-                x: this.#getSecondaryImageX('base'),
-                y: this.#getBaseY()
-            }
+        this.basePosition = {
+            primary: { x: 0, y: (cityAspectRatio.h - baseAspectRatio.h) },
+            secondary: { x: baseAspectRatio.w, y: (cityAspectRatio.h - baseAspectRatio.h) }
         }
 
     }
 
-    #getBaseY() {
-        return (this.canvas.height - this.BACKGROUND['base'].image.height)
-    }
+    draw({ image, position }) {
 
-    #getSecondaryImageX(name) {
-        return (this.BACKGROUND[name].image.width)
-    }
-
-    draw({ asset, position }) {
-
-        this.ctx.drawImage(asset.image, position.primary.x, position.primary.y)
-
-        this.ctx.drawImage(asset.image, position.secondary.x, position.secondary.y)
+        ctx.drawImage(image, position.primary.x, position.primary.y)
+        ctx.drawImage(image, position.secondary.x, position.secondary.y)
 
     }
 
+    slide(position, X, speed = 2) {
 
-    slide(assetPosition, X, speed = 2) {
+        position.primary.x -= speed
+        position.secondary.x -= speed
 
-        assetPosition.primary.x -= speed
-        assetPosition.secondary.x -= speed
-
-        if (assetPosition.primary.x < -X) {
-            assetPosition.primary.x += (X * 2)
-        } else if (assetPosition.secondary.x < -X) {
-            assetPosition.secondary.x += (X * 2)
+        if (position.primary.x < -X) 
+        {
+            position.primary.x += (X * 2)
+        } 
+        else if (position.secondary.x < -X) 
+        {
+            position.secondary.x += (X * 2)
         }
 
     }
 
+    update(hasStarted) {
 
-    update() {
+        this.draw({ image: this.assets['city'].image, position: this.cityPosition })
+        this.draw({ image: this.assets['base'].image, position: this.basePosition })
 
-        this.draw({
-            asset: this.BACKGROUND['city'],
-            position: this.CITY_POSITION
-        })
+        if (hasStarted) {
 
-        this.draw({
-            asset: this.BACKGROUND['base'],
-            position: this.BASE_POSITION
-        })
+            this.slide(this.cityPosition, this.assets['city'].image.width, 1)
+            this.slide(this.basePosition, this.assets['base'].image.width)
 
-        this.slide(this.CITY_POSITION, this.BACKGROUND['city'].image.width, 1)
+        }
 
-        this.slide(this.BASE_POSITION, this.BACKGROUND['base'].image.width)
     }
 
 }
