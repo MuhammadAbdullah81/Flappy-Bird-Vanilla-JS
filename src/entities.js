@@ -1,6 +1,7 @@
-import { canvas } from "./canvas"
-import { Background, Bird, Pipe } from "./classes"
 import { GAME_ASSETS } from "./assets"
+import { Background } from "./classes/background"
+import { Pipe } from "./classes/pipes"
+import { Bird } from "./classes/bird"
 
 export const city = new Background({
     assets: GAME_ASSETS.background.city,
@@ -15,7 +16,7 @@ export const base = new Background({
 
 export const pipes = new Pipe({
     assets: GAME_ASSETS.pipes,
-    aspectRatio: { w: 52, h: Math.floor((canvas.height / 2) - 30) }
+    aspectRatio: { w: 52, h: 320 }
 })
 
 export const bird = new Bird({
