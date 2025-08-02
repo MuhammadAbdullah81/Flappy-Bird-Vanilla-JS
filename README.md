@@ -8,6 +8,11 @@ It uses HTML5 canvas and Vanilla Javascript to draw and animate 2D objects
 - 2D animation of Sprites
 - Object Oriented Programming concepts
 
+## 🚀 Live Demo
+👉 **Try it out:** [View the demo](https://flappybirdvanillajs.netlify.app/)  
+🔗 Hosted via Netlify.  
+![Demo Screenshot]()
+
 ## 📦 Installation
 1. clone the repo:
    ```bash
