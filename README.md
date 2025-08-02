@@ -11,7 +11,7 @@ It uses HTML5 canvas and Vanilla Javascript to draw and animate 2D objects
 ## 📦 Installation
 1. clone the repo:
    ```bash
-   git clone https://github.com/username/repository.git
+   git clone https://github.com/MuhammadAbdullah81/Flappy-Bird-Vanilla-JS/tree/main
 2. install dependencies:
    ```bash
    npm install
