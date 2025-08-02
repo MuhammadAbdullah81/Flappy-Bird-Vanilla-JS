@@ -55,7 +55,7 @@ export class Bird {
             this.position.y += 5
         }
         else if (this.position.y >= (400 - this.aspectRatio.h)) {
-            // this.states.isAlive = false
+            this.states.isAlive = false
             this.position.y = (400 - this.aspectRatio.h)
         }
 
@@ -73,5 +73,12 @@ export class Bird {
             this.animate()
             this.gravity()
         }
+    }
+
+    restart() {
+        this.position.y = 10
+        this.states.isAlive = true
+        this.currentFrame = 0
+        this.frameCounter = 0
     }
 }

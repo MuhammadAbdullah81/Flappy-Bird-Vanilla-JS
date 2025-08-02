@@ -41,9 +41,22 @@ export class Background {
 
     }
 
-    update(hasStarted) {
+    update(hasStarted, isAlive) {
         this.draw()
-        if (hasStarted) this.slide()
+        if (hasStarted && isAlive) this.slide()
+    }
+
+    restart() {
+        this.position = {
+            primaryImage: {
+                x: 0,
+                y: (canvas.height - this.aspectRatio.h)
+            },
+            secondaryImage: {
+                x: this.aspectRatio.w,
+                y: (canvas.height - this.aspectRatio.h)
+            }
+        }
     }
 
 }

@@ -7,11 +7,11 @@ export class Pipe {
         this.speed = speed
         this.positionPipeDown = {
             x: canvas.width + this.aspectRatio.w,
-            y: -100
+            y: -110
         }
         this.positionPipeUp = {
             x: this.positionPipeDown.x,
-            y: (canvas.height - this.aspectRatio.h) + 100
+            y: (canvas.height - this.aspectRatio.h) + 110
         }
 
         for (let asset in assets) {
@@ -50,8 +50,8 @@ export class Pipe {
     }
 
     getRandomHeight() {
-        this.positionPipeDown.y = -100
-        this.positionPipeUp.y = (canvas.height - this.aspectRatio.h + 100)
+        this.positionPipeDown.y = -110
+        this.positionPipeUp.y = (canvas.height - this.aspectRatio.h + 110)
 
         let offSet = Math.floor((Math.random() * 45) + 40)
         const turn = Math.floor((Math.random() * 2) + 1)
@@ -68,9 +68,20 @@ export class Pipe {
 
     }
 
-    update(hasStarted) {
+    update(hasStarted, isAlive) {
         this.draw()
-        if (hasStarted) this.slide()
+        if (hasStarted && isAlive) this.slide()
+    }
+
+    restart() {
+        this.positionPipeDown = {
+            x: canvas.width + this.aspectRatio.w,
+            y: -110
+        }
+        this.positionPipeUp = {
+            x: this.positionPipeDown.x,
+            y: (canvas.height - this.aspectRatio.h) + 110
+        }
     }
 
 }

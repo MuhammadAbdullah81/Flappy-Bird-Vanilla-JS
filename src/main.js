@@ -4,31 +4,45 @@ import { collisionDetection } from './collisionDetection'
 
 export let hasStarted = false
 
+const show_hide_controls = document.querySelector("button")
+
 function animationLoop() {
 
-  city.update(hasStarted)
-  pipes.update(hasStarted)
-  base.update(hasStarted)
-  bird.update(hasStarted)
+  collisionDetection({ player: bird, obstacle: pipes })
 
 
-  if (bird.states.isFlappying) {
+  city.update(hasStarted, bird.states.isAlive)
+  pipes.update(hasStarted, bird.states.isAlive)
+  base.update(hasStarted, bird.states.isAlive)
+  bird.update(hasStarted, bird.states.isAlive)
+
+
+  if (bird.states.isFlappying && hasStarted) {
     bird.flap()
   }
-
-  collisionDetection({ player: bird, obstacle: pipes })
 
   requestAnimationFrame(animationLoop)
 }
 
 requestAnimationFrame(animationLoop)
 
-window.addEventListener("click", () => { hasStarted = !hasStarted })
+
+// User Inputs
 
 window.addEventListener("keydown", (e) => {
 
   if (e.keyCode == 32) {
     bird.states.isFlappying = true
+  }
+  else if (e.key.trim().toLocaleLowerCase() == 's') {
+    hasStarted = !hasStarted
+  }
+  else if (e.key.trim().toLocaleLowerCase() == 'r') {
+    city.restart()
+    pipes.restart()
+    base.restart()
+    bird.restart()
+    hasStarted = true
   }
 
 })
@@ -39,4 +53,9 @@ window.addEventListener("keyup", (e) => {
     bird.states.isFlappying = false
   }
 
+})
+
+show_hide_controls.addEventListener("click", () => {
+  const controls = document.querySelector(".wrapper")
+  controls.classList.toggle("show")
 })

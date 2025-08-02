@@ -5,15 +5,68 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   background: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 canvas {
   width: 288px;
   height: 512px;
+}
+
+table {
+  color: #fff;
+  border: 1px solid #fff;
+  width: 288px;
+}
+
+tr {
+  width: 100%;
+}
+
+td,th {
+  border: 1px solid #fff;
+  width: 50%;
+  padding: 5px 0px;
+  text-align: center;
+} 
+
+button {
+  padding: 10px;
+  width: 288px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  transition: all 300ms ease;
+  cursor: pointer;
+
+  &:hover {
+    color: #333;
+    background: #fff;
+  }
+}
+
+.wrapper {
+  width: 320px;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  transform: translateX(320px);
+  transition: all 300ms ease;
+}
+
+.show {
+  transform: translateX(0px);
 }
