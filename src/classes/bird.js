@@ -49,10 +49,10 @@ export class Bird {
 
     }
 
-    gravity() {
+    gravity(deltaTime) {
 
         if (this.position.y < (400 - this.aspectRatio.h) && !this.states.isFlappying) {
-            this.position.y += 5
+            this.position.y += (5 * deltaTime)
         }
         else if (this.position.y >= (400 - this.aspectRatio.h)) {
             this.states.isAlive = false
@@ -65,13 +65,13 @@ export class Bird {
         if (this.position.y > 5 && this.states.isAlive) this.position.y -= 7
     }
 
-    update(hasStarted) {
+    update(hasStarted, deltaTime) {
 
         this.draw()
 
         if (hasStarted && this.states.isAlive) {
             this.animate()
-            this.gravity()
+            this.gravity(deltaTime)
         }
     }
 

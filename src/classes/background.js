@@ -2,7 +2,7 @@ import { canvas, ctx } from "../canvas"
 
 export class Background {
 
-    constructor({ assets, aspectRatio, speed = 1 }) {
+    constructor({ assets, aspectRatio, speed = 50 }) {
 
         this.image = new Image()
         this.image.src = assets.imgSrc
@@ -27,10 +27,10 @@ export class Background {
         ctx.drawImage(this.image, this.position.secondaryImage.x, this.position.secondaryImage.y)
     }
 
-    slide() {
+    slide(deltaTime) {
 
-        this.position.primaryImage.x -= this.speed
-        this.position.secondaryImage.x -= this.speed
+        this.position.primaryImage.x -= (this.speed * deltaTime)
+        this.position.secondaryImage.x -= (this.speed * deltaTime)
 
         if (this.position.primaryImage.x < -this.aspectRatio.w) {
             this.position.primaryImage.x += (this.aspectRatio.w * 2)
@@ -41,9 +41,9 @@ export class Background {
 
     }
 
-    update(hasStarted, isAlive) {
+    update(hasStarted, isAlive, deltaTime) {
         this.draw()
-        if (hasStarted && isAlive) this.slide()
+        if (hasStarted && isAlive) this.slide(deltaTime)
     }
 
     restart() {

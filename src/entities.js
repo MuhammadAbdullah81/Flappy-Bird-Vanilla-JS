@@ -11,7 +11,7 @@ export const city = new Background({
 export const base = new Background({
     assets: GAME_ASSETS.background.base,
     aspectRatio: { h: 112, w: 336 },
-    speed: 2
+    speed: 100
 })
 
 export const pipes = new Pipe({

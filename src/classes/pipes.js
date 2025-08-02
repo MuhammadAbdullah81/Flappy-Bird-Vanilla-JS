@@ -1,7 +1,7 @@
 import { canvas, ctx } from "../canvas"
 
 export class Pipe {
-    constructor({ assets, aspectRatio, speed = 2 }) {
+    constructor({ assets, aspectRatio, speed = 100 }) {
         this.assets = assets
         this.aspectRatio = aspectRatio
         this.speed = speed
@@ -39,9 +39,9 @@ export class Pipe {
         )
     }
 
-    slide() {
-        this.positionPipeDown.x -= this.speed
-        this.positionPipeUp.x -= this.speed
+    slide(deltaTime) {
+        this.positionPipeDown.x -= (this.speed * deltaTime)
+        this.positionPipeUp.x -= (this.speed * deltaTime)
 
         if (this.positionPipeDown.x < -this.aspectRatio.w) {
             this.positionPipeDown.x = this.positionPipeUp.x = canvas.width + this.aspectRatio.w
@@ -68,9 +68,9 @@ export class Pipe {
 
     }
 
-    update(hasStarted, isAlive) {
+    update(hasStarted, isAlive, deltaTime) {
         this.draw()
-        if (hasStarted && isAlive) this.slide()
+        if (hasStarted && isAlive) this.slide(deltaTime)
     }
 
     restart() {
