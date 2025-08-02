@@ -11,7 +11,7 @@ It uses HTML5 canvas and Vanilla Javascript to draw and animate 2D objects
 ## 🚀 Live Demo
 👉 **Try it out:** [View the demo](https://flappybirdvanillajs.netlify.app/)  
 🔗 Hosted via Netlify.  
-![Demo Screenshot]()
+![Demo Screenshot](https://github.com/MuhammadAbdullah81/Flappy-Bird-Vanilla-JS/blob/main/public/sc.png)
 
 ## 📦 Installation
 1. clone the repo:
